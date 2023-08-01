@@ -1,4 +1,8 @@
 *.cmd
+!target/
+target/*
+!target/site/
+target/site/*
 !target/site/apidocs
-target
+
 
