@@ -1,3 +1,4 @@
 *.cmd
+!target/site/apidocs
 target
 
