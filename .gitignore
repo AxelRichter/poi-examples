@@ -1,2 +1,8 @@
-!pom.xml
-target
+# exclude everything except directory foo/bar
+/*
+!/pom.xml
+!/README.md
+!/src
+!/src/*
+!/docs
+!/docs/*
