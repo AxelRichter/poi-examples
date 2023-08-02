@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"arichter.examples.apache.poi","l":"AppTest"},{"p":"arichter.examples.apache.poi.ss","l":"ObjectCellValueTest"},{"p":"arichter.examples.apache.poi.sl","l":"ReplaceTextInRunsTest"},{"p":"arichter.examples.apache.poi.wp","l":"ReplaceTextInRunsTest"}];updateSearchResults();
