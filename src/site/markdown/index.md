@@ -1,45 +1,7 @@
-Heading
-=======
+# What is poi-examples?
+This shall be compilable examples for how to use [Apache POI](https://poi.apache.org/). Thats why using a GitHub repository.
 
-Sub-heading
------------
+It my contain usable tool classes too. But mainly it provides example code only.
 
-# Alternative heading
-
-## Alternative sub-heading
-
-Paragraphs are separated 
-by a blank line.
-
-Paragraphs are separated 
-by a blank line.
-
-Two spaces at the end of a line  
-produce a line break.
-
-Text attributes _italic_, **bold**, `monospace`.
-
-Horizontal rule:
-
----
-
-Bullet lists nested within numbered list:
-
-  1. fruits
-     * apple
-     * banana
-  2. vegetables
-     - carrot
-     - broccoli
-     
-
-A [link](http://example.com).
-
-![Image](images/pict100x100.png "icon")
-
-> Markdown uses email-style
-characters for blockquoting.
->
-> Multiple paragraphs need to be prepended individually.
-
-Most inline <abbr title="Hypertext Markup Language">HTML</abbr> tags are supported.
+# What is poi-examples not?
+This is not a Java library to import and use via Jar library. Thats why it is not on Maven Central.
