@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
 * */
 public class ObjectCellValue {
     
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger(ObjectCellValue.class);
     
     /**
     * Enum of usable classes to get date and/or date time values 

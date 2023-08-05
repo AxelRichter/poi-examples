@@ -17,7 +17,7 @@ import org.apache.logging.log4j.Logger;
 * */
 public class ReplaceTextInRuns {
     
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger(ReplaceTextInRuns.class);
     
     private String s1EndsWithLeftPartOfS2(String s1, String s2) {
         String overlap = "";
