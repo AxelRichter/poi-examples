@@ -9,17 +9,28 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+/**
+* Test the methods of class ReplaceTextInRuns  
+*
+* @author Axel Richter
+* 
+* @see arichter.examples.apache.poi.sl.ReplaceTextInRuns
+* */
 public class ReplaceTextInRunsTest {
     
+    /**
+    * Text method for method replace of {@link arichter.examples.apache.poi.sl.ReplaceTextInRuns}.
+    * Test is passed if no exceptions thrown.
+    */
     @Test
     public void testReplace() throws Exception {
         
         ReplaceTextInRuns replaceTextInRuns = new ReplaceTextInRuns();
         
         try (
-            InputStream is = getClass().getResourceAsStream("/sl/PPT.pptx");
+            InputStream is = getClass().getResourceAsStream("/sl/PPTHavingTextShape.pptx");
             XMLSlideShow slideShow = new XMLSlideShow(is);
-            FileOutputStream out = new FileOutputStream("./PPTNew.pptx");
+            FileOutputStream out = new FileOutputStream("./PPTHavingTextShapeResult.pptx");
             ) {
 
             for (XSLFSlide slide : slideShow.getSlides()) {
@@ -27,7 +38,7 @@ public class ReplaceTextInRunsTest {
                     if (shape instanceof XSLFTextShape) {
                         XSLFTextShape textShape = (XSLFTextShape)shape;
                         for (XSLFTextParagraph paragraph : textShape.getTextParagraphs()) {
-                            List<XSLFTextRun> runs = replaceTextInRuns.replace(paragraph, "${Firma}", "Sample Corporation LTD");
+                            List<XSLFTextRun> runs = replaceTextInRuns.replace(paragraph, "${placeholder}", "text to replace the placeholder");
                             System.out.println(runs);
                         }
                     }
@@ -37,6 +48,7 @@ public class ReplaceTextInRunsTest {
             slideShow.write(out);
         }
         
+        // test is passed if no exceptions thrown
         assertTrue(true);
 
     }
