@@ -9,5 +9,5 @@ This is not a Java library to import and use via Jar library. Thats why it is no
 # Description of the single examples
 See https://github.com/AxelRichter/poi-examples/wiki
 
-# Documentation
+# API Documentation
 https://axelrichter.github.io/poi-examples/
