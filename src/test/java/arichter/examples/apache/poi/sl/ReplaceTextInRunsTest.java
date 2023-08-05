@@ -1,7 +1,6 @@
 package arichter.examples.apache.poi.sl;
 
 import java.io.InputStream;
-import java.io.FileOutputStream;
 
 import org.apache.poi.xslf.usermodel.*;
 import java.util.List;
@@ -37,7 +36,6 @@ public class ReplaceTextInRunsTest {
         try (
             InputStream is = getClass().getResourceAsStream("/sl/PPTHavingTextToReplace.pptx");
             XMLSlideShow slideShow = new XMLSlideShow(is);
-            FileOutputStream out = new FileOutputStream("./PPTHavingTextToReplaceResult.pptx");
             ) {
 
             for (XSLFSlide slide : slideShow.getSlides()) {
@@ -51,7 +49,6 @@ public class ReplaceTextInRunsTest {
                 }
                 
             }
-            slideShow.write(out);
         }
         
         // test is passed if no exceptions thrown

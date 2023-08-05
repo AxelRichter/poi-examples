@@ -19,13 +19,6 @@ public class ObjectCellValue {
     private static final Logger LOG = LogManager.getLogger(ObjectCellValue.class);
     
     /**
-    * Constructor not used
-    */
-    public ObjectCellValue() {
-    }
-
-    
-    /**
     * Enum of usable classes to get date and/or date time values 
     * from {@link org.apache.poi.ss.usermodel.Cell} 
     */
@@ -41,6 +34,13 @@ public class ObjectCellValue {
     }
 
     private DateTimeClass dateTimeClass = DateTimeClass.JAVA_UTIL_DATE;    
+    
+    /**
+    * Constructor not used
+    */
+    public ObjectCellValue() {
+    }
+
     
     /**
     * Setter method for used {@link DateTimeClass}

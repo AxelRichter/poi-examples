@@ -3,7 +3,6 @@ package arichter.examples.apache.poi.ss;
 import arichter.examples.apache.poi.ss.ObjectCellValue.DateTimeClass;
 
 import java.io.InputStream;
-import java.io.FileOutputStream;
 
 import org.apache.poi.ss.usermodel.*;
 
@@ -67,7 +66,6 @@ public class ObjectCellValueTest {
         try (
             InputStream is = getClass().getResourceAsStream("/ss/ExcelExampleToTextObjectCellValue.xlsx");
             Workbook workbook = WorkbookFactory.create(is);
-            FileOutputStream out = new FileOutputStream("./ExcelExampleToTextObjectCellValueResult.xlsx");
             ) {
             
             Sheet sheet = workbook.createSheet();
@@ -116,7 +114,6 @@ public class ObjectCellValueTest {
             cell = row.createCell(c);
             objectCellValue.setCellValue(cell, java.time.LocalDateTime.now());
             
-            workbook.write(out);
         }
         
         // test is passed if no exceptions thrown

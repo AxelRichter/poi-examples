@@ -1,7 +1,6 @@
 package arichter.examples.apache.poi.wp;
 
 import java.io.InputStream;
-import java.io.FileOutputStream;
 
 import org.apache.poi.xwpf.usermodel.*;
 import java.util.List;
@@ -37,14 +36,11 @@ public class ReplaceTextInRunsTest {
         try (
             InputStream is = getClass().getResourceAsStream("/wp/WordDocumentHavingTextToReplace.docx");
             XWPFDocument document = new XWPFDocument(is);
-            FileOutputStream out = new FileOutputStream("./WordDocumentHavingTextToReplaceResult.docx");
             ) {
 
             for (XWPFParagraph paragraph : document.getParagraphs()) {
                 List<XWPFRun> runs = replaceTextInRuns.replace(paragraph, "${placeholder}", "text to replace the placeholder");
             }
-
-            document.write(out);
         }
         
         // test is passed if no exceptions thrown
