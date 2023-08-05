@@ -20,6 +20,12 @@ import org.junit.Test;
 public class ObjectCellValueTest {
     
     /**
+    * Constructor not used
+    */
+    public ObjectCellValueTest() {
+    }
+    
+    /**
     * Test method for method getCellValue of {@link arichter.examples.apache.poi.ss.ObjectCellValue}.
     * Test is passed if no exceptions thrown.
     * @throws Exception at any Exception

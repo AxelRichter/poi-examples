@@ -5,6 +5,13 @@ package arichter.examples.apache.poi;
  *
  */
 public class App {
+
+    /**
+    * Constructor not used
+    */
+    public App() {
+    }
+    
     /**
     * main method for this app
     * @param args default arguments

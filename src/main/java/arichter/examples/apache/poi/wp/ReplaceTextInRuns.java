@@ -19,6 +19,12 @@ public class ReplaceTextInRuns {
     
     private static final Logger LOG = LogManager.getLogger(ReplaceTextInRuns.class);
     
+    /**
+    * Constructor not used
+    */
+    public ReplaceTextInRuns() {
+    }
+    
     private String s1EndsWithLeftPartOfS2(String s1, String s2) {
         String overlap = "";
         for (int i = 0; i < s2.length(); i++) {

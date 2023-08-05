@@ -26,9 +26,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class ReplaceTextInRunsSlExample {
     
     private static final Logger LOG = LogManager.getLogger(ReplaceTextInRunsSlExample.class);
+    
+    /**
+    * Constructor not used
+    */
+    public ReplaceTextInRunsSlExample() {
+    }
 
     /**
-    *
+    * Simple static method to show the usage of {@link arichter.examples.apache.poi.sl.ReplaceTextInRuns}
     * @param args default arguments
     */
     public static void main( String[] args ) {

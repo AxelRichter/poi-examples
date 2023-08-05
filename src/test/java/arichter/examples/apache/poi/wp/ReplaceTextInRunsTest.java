@@ -19,6 +19,12 @@ import org.junit.Test;
 public class ReplaceTextInRunsTest {
     
     /**
+    * Constructor not used
+    */
+    public ReplaceTextInRunsTest() {
+    }
+    
+    /**
     * Test method for method replace of {@link arichter.examples.apache.poi.wp.ReplaceTextInRuns}.
     * Test is passed if no exceptions thrown.
     * @throws Exception at any Exception
