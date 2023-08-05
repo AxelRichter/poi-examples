@@ -9,28 +9,39 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+/**
+* Test the methods of class {@link arichter.examples.apache.poi.wp.ReplaceTextInRuns}  
+*
+* @author Axel Richter
+* 
+* @see arichter.examples.apache.poi.wp.ReplaceTextInRuns
+* */
 public class ReplaceTextInRunsTest {
     
+    /**
+    * Test method for method replace of {@link arichter.examples.apache.poi.wp.ReplaceTextInRuns}.
+    * Test is passed if no exceptions thrown.
+    * @throws Exception at any Exception
+    */
     @Test
     public void testReplace() throws Exception {
         
         ReplaceTextInRuns replaceTextInRuns = new ReplaceTextInRuns();
         
         try (
-            InputStream is = getClass().getResourceAsStream("/wp/WordDocument.docx");
+            InputStream is = getClass().getResourceAsStream("/wp/WordDocumentHavingTextToReplace.docx");
             XWPFDocument document = new XWPFDocument(is);
-            FileOutputStream out = new FileOutputStream("./WordDocumentNew.docx");
+            FileOutputStream out = new FileOutputStream("./WordDocumentHavingTextToReplaceResult.docx");
             ) {
 
             for (XWPFParagraph paragraph : document.getParagraphs()) {
-                List<XWPFRun> runs = replaceTextInRuns.replace(paragraph, "${Firma}", "Sample Corporation LTD");
-                System.out.println(runs);
+                List<XWPFRun> runs = replaceTextInRuns.replace(paragraph, "${placeholder}", "text to replace the placeholder");
             }
-
 
             document.write(out);
         }
         
+        // test is passed if no exceptions thrown
         assertTrue(true);
 
     }

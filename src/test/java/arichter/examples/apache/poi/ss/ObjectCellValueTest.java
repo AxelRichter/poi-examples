@@ -10,8 +10,20 @@ import org.apache.poi.ss.usermodel.*;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
+/**
+* Test the methods of class {@link arichter.examples.apache.poi.ss.ObjectCellValue}  
+*
+* @author Axel Richter
+* 
+* @see arichter.examples.apache.poi.ss.ObjectCellValue
+* */
 public class ObjectCellValueTest {
     
+    /**
+    * Test method for method getCellValue of {@link arichter.examples.apache.poi.ss.ObjectCellValue}.
+    * Test is passed if no exceptions thrown.
+    * @throws Exception at any Exception
+    */
     @Test
     public void testGetCellValue() throws Exception {
         
@@ -19,7 +31,7 @@ public class ObjectCellValueTest {
         objectCellValue.setDateTimeClass(DateTimeClass.JAVA_TIME_LOCALDATETIME);
         
         try (
-            InputStream is = getClass().getResourceAsStream("/ss/ExcelExample.xlsx");
+            InputStream is = getClass().getResourceAsStream("/ss/ExcelExampleToTextObjectCellValue.xlsx");
             Workbook workbook = WorkbookFactory.create(is);
             ) {
             
@@ -27,24 +39,29 @@ public class ObjectCellValueTest {
             for (Row row : sheet) {
                 for (Cell cell : row ) {
                     Object cellValue = objectCellValue.getCellValue(cell, cell.getCellType());
-                    System.out.println(cellValue);
                 }
             }                
         }
         
+        // test is passed if no exceptions thrown
         assertTrue(true);
 
     }
     
+    /**
+    * Test method for method setCellValue of {@link arichter.examples.apache.poi.ss.ObjectCellValue}.
+    * Test is passed if no exceptions thrown.
+    * @throws Exception at any Exception
+    */
     @Test
     public void testSetCellValue() throws Exception {
         
         ObjectCellValue objectCellValue = new ObjectCellValue();
         
         try (
-            InputStream is = getClass().getResourceAsStream("/ss/ExcelExample.xlsx");
+            InputStream is = getClass().getResourceAsStream("/ss/ExcelExampleToTextObjectCellValue.xlsx");
             Workbook workbook = WorkbookFactory.create(is);
-            FileOutputStream out = new FileOutputStream("./ExcelExampleNew.xlsx");
+            FileOutputStream out = new FileOutputStream("./ExcelExampleToTextObjectCellValueResult.xlsx");
             ) {
             
             Sheet sheet = workbook.createSheet();
@@ -96,6 +113,7 @@ public class ObjectCellValueTest {
             workbook.write(out);
         }
         
+        // test is passed if no exceptions thrown
         assertTrue(true);
 
     }
