@@ -1,4 +1,4 @@
-# exclude everything except directory foo/bar
+# exclude everything except ...
 /*
 !/pom.xml
 !/README.md
@@ -6,3 +6,5 @@
 !/src/*
 !/docs
 !/docs/*
+!/run
+!/run/*
