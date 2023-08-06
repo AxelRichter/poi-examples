@@ -90,7 +90,7 @@ public class ObjectCellValue {
             case BLANK:
                 return null;
             default:
-                LOG.atWarn().log("This should not occur.", cell, type);
+                LOG.atWarn().log("This should not occur. Cell {} had type {}.", cell, type);
                 return null;
         }
     }
