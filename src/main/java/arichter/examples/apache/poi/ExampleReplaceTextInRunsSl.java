@@ -26,12 +26,18 @@ public class ExampleReplaceTextInRunsSl {
     
     /**
     * Constructor method to show the usage of {@link arichter.examples.apache.poi.sl.ReplaceTextInRuns}
+    */
+    public ExampleReplaceTextInRunsSl() {
+    }
+    
+    /**
+    * Rub method to show the usage of {@link arichter.examples.apache.poi.sl.ReplaceTextInRuns}
     * @param sourceFilePath sourceFilePath
     * @param targetFilePath targetFilePath
     * @param placeholderText placeholderText
     * @param replacementText replacementText
     */
-    public ExampleReplaceTextInRunsSl(String sourceFilePath, String targetFilePath, String placeholderText, String replacementText) {
+    public void run(String sourceFilePath, String targetFilePath, String placeholderText, String replacementText) {
         try {            
             File sourceFile = null;
             if(sourceFilePath != null) {
@@ -87,9 +93,10 @@ public class ExampleReplaceTextInRunsSl {
 
     /**
     * Main method 
-    * @param args args[0] = sourceFilePath
-    *             args[1] = targetFilePath
-    *             args[2] = placeholderText, default "${placeholder}"
+    * @param args array of parameters <br/>
+    *             args[0] = sourceFilePath <br/>
+    *             args[1] = targetFilePath <br/>
+    *             args[2] = placeholderText, default "${placeholder}" <br/>
     *             args[3] = replacementText, default "text to replace the placeholder"
     */
     public static void main( String[] args ) {
@@ -112,7 +119,8 @@ public class ExampleReplaceTextInRunsSl {
             replacementText = args[3];
         }
 
-        ExampleReplaceTextInRunsSl example = new ExampleReplaceTextInRunsSl(sourceFilePath, targetFilePath, placeholderText, replacementText);
+        ExampleReplaceTextInRunsSl example = new ExampleReplaceTextInRunsSl();
+        example.run(sourceFilePath, targetFilePath, placeholderText, replacementText);
 
     }
 }

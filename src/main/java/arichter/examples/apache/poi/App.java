@@ -7,6 +7,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.Map; 
+import java.util.HashMap; 
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,75 +20,54 @@ import org.apache.logging.log4j.Logger;
 public class App extends JPanel implements ActionListener {
 
     private static final Logger LOG = LogManager.getLogger(App.class);
+    
+    private static final Map<String, String> examples = new HashMap<String, String>();
+    static {
+        examples.put("Example replace text in PowertPoint", "ExampleReplaceTextInRunsSl");    
+        examples.put("Example 2", null);    
+        examples.put("Example 3", null);    
+        examples.put("Example 4", null);    
+    }
 
     /**
-    * Constructor not used
+    * Constructor for main app
     */
     public App() {
         super(new GridLayout(0,1));
         JPanel panel = new JPanel(new GridLayout(0,1));
-        JButton button = new JButton("Example 1");
-        button.setActionCommand("Example 1");
-        button.addActionListener(this);
-        panel.add(button);
-        button = new JButton("Example 2");
-        button.setActionCommand("Example 2");
-        button.addActionListener(this);
-        panel.add(button);
+        JButton button = null;
+        for (String example : examples.keySet()) {
+            button = new JButton(example);
+            button.setActionCommand(example);
+            button.addActionListener(this);
+            panel.add(button);
+        }
         JScrollPane scrollPane = new JScrollPane(panel);
         add(scrollPane);
     }
     
-    public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
-    }      
-    
-    private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
-        frame.setLayout(new BorderLayout());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- 
-        //Create the menu bar.  Make it have a green background.
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setOpaque(true);
-        menuBar.setPreferredSize(new Dimension(0, 20));
-        JMenu menu = new JMenu("A Menu");
-        menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
-        menuBar.add(menu);
- 
-        //Set the menu bar and add the label to the content pane.
-        frame.setJMenuBar(menuBar);
-        
-        //Create and set up the content pane.
-        JComponent newContentPane = new App();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane); 
-        
-        frame.setLocationRelativeTo(null);
-       
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
- 
     /**
-    * main method for this app
-    * @param args default arguments
+    * Action listener method
+    * @param e {@link java.awt.event.ActionEvent}
     */
-    public static void main(String[] args) {
-        //Schedule a job for the event-dispatching thread:
-        //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
+    public void actionPerformed(ActionEvent e) {
+        String example = e.getActionCommand();
+        String className = examples.get(example);
+        if (className != null) {
+            try {
+                Class classObject = Class.forName(this.getClass().getPackage().getName() + "." + className);
+                runExample(classObject);
+            } catch (Exception ex) {
+                LOG.atWarn().log("Could not open class for name {}.", className);
             }
-        });
-    }
-    
-    private void codeDump() {
+        } 
+    }   
 
+    private void runExample(Class classObject) {
+        if (classObject.getName().endsWith("ExampleReplaceTextInRunsSl")) {
+            System.out.println(classObject.getName());
+            
+            String sourceFilePath = null;
             File selectedFile = null;
             JFileChooser chooser = new JFileChooser();
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
@@ -95,32 +77,76 @@ public class App extends JPanel implements ActionListener {
             int returnVal = chooser.showOpenDialog(null);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 selectedFile = chooser.getSelectedFile();
+                sourceFilePath = selectedFile.getAbsolutePath();
             }
-
 
             String placeholderText = "${placeholder}";
             String replacementText = "text to replace the placeholder";
 
-                    JTextField placeholderField = new JTextField();
-                    placeholderField.setText(placeholderText);
-                    JTextField replacementTextField = new JTextField();
-                    replacementTextField.setText(replacementText);
-                    Object[] message = {
-                        "PLacehoder:", placeholderField,
-                        "Replacement text:", replacementTextField
-                    };
-                    int option = JOptionPane.showConfirmDialog(null, message, "Input parameters", JOptionPane.OK_CANCEL_OPTION);
-                    if (option == JOptionPane.OK_OPTION) {
-                        placeholderText = placeholderField.getText();
-                        replacementText = replacementTextField.getText();
-                    }
+            JTextField placeholderField = new JTextField();
+            placeholderField.setText(placeholderText);
+            JTextField replacementTextField = new JTextField();
+            replacementTextField.setText(replacementText);
+            Object[] message = {
+                "PLacehoder:", placeholderField,
+                "Replacement text:", replacementTextField
+            };
+            int option = JOptionPane.showConfirmDialog(null, message, "Input parameters", JOptionPane.OK_CANCEL_OPTION);
+            if (option == JOptionPane.OK_OPTION) {
+                placeholderText = placeholderField.getText();
+                replacementText = replacementTextField.getText();
+            }
 
+            String targetFilePath = null;
+            returnVal = chooser.showSaveDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                selectedFile = chooser.getSelectedFile();
+                targetFilePath = selectedFile.getAbsolutePath();
+            }
 
-                returnVal = chooser.showSaveDialog(null);
-                if(returnVal == JFileChooser.APPROVE_OPTION) {
-                    selectedFile = chooser.getSelectedFile();
-                }
+            try {
+                ExampleReplaceTextInRunsSl example = (ExampleReplaceTextInRunsSl)classObject.newInstance();
+                example.run(sourceFilePath, targetFilePath, placeholderText, replacementText);
+            } catch (Exception ex) {
+                LOG.atWarn().log("Could not run {}.", classObject);
+            }
+        } else if (classObject.getName().endsWith("")) {
+        }
+    }        
+    
+    private static void createAndShowGUI() {
+        JFrame frame = new JFrame("Examples for usage of Apache POI");
+        frame.setLayout(new BorderLayout());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+        // JMenuBar menuBar = new JMenuBar();
+        // menuBar.setOpaque(true);
+        // menuBar.setPreferredSize(new Dimension(0, 20));
+        // JMenu menu = new JMenu("A Menu");
+        // menu.setMnemonic(KeyEvent.VK_A);
+        // menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+        // menuBar.add(menu);
+        // frame.setJMenuBar(menuBar);
         
+        JComponent newContentPane = new App();
+        newContentPane.setOpaque(true);
+        frame.setContentPane(newContentPane); 
         
+        frame.setLocationRelativeTo(null);
+       
+        frame.pack();
+        frame.setVisible(true);
+    }
+ 
+    /**
+    * main method for this app
+    * @param args default arguments
+    */
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
 }
