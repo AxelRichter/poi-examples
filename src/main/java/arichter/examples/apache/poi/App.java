@@ -2,6 +2,9 @@ package arichter.examples.apache.poi;
 
 import java.io.File;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JFileChooser;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
@@ -23,13 +26,33 @@ public class App {
     */
     public App() {
     }
-    
+        
+    private static void createAndShowGUI() {
+        //Create and set up the window.
+        JFrame frame = new JFrame("HelloWorldSwing");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+ 
+        //Add the ubiquitous "Hello World" label.
+        JLabel label = new JLabel("Hello World");
+        frame.getContentPane().add(label);
+ 
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+    }
+ 
     /**
     * main method for this app
     * @param args default arguments
     */
-    public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+    public static void main(String[] args) {
+        //Schedule a job for the event-dispatching thread:
+        //creating and showing this application's GUI.
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                createAndShowGUI();
+            }
+        });
     }
     
     private void codeDump() {
