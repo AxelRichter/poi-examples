@@ -2,13 +2,10 @@ package arichter.examples.apache.poi;
 
 import java.io.File;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JFileChooser;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import java.awt.*;
+import java.awt.event.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  * The main app for this package
  *
  */
-public class App {
+public class App extends JPanel implements ActionListener {
 
     private static final Logger LOG = LogManager.getLogger(App.class);
 
@@ -25,17 +22,49 @@ public class App {
     * Constructor not used
     */
     public App() {
+        super(new GridLayout(0,1));
+        JPanel panel = new JPanel(new GridLayout(0,1));
+        JButton button = new JButton("Example 1");
+        button.setActionCommand("Example 1");
+        button.addActionListener(this);
+        panel.add(button);
+        button = new JButton("Example 2");
+        button.setActionCommand("Example 2");
+        button.addActionListener(this);
+        panel.add(button);
+        JScrollPane scrollPane = new JScrollPane(panel);
+        add(scrollPane);
     }
-        
+    
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
+    }      
+    
     private static void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("HelloWorldSwing");
+        frame.setLayout(new BorderLayout());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-        //Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
+        //Create the menu bar.  Make it have a green background.
+        JMenuBar menuBar = new JMenuBar();
+        menuBar.setOpaque(true);
+        menuBar.setPreferredSize(new Dimension(0, 20));
+        JMenu menu = new JMenu("A Menu");
+        menu.setMnemonic(KeyEvent.VK_A);
+        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
+        menuBar.add(menu);
  
+        //Set the menu bar and add the label to the content pane.
+        frame.setJMenuBar(menuBar);
+        
+        //Create and set up the content pane.
+        JComponent newContentPane = new App();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane); 
+        
+        frame.setLocationRelativeTo(null);
+       
         //Display the window.
         frame.pack();
         frame.setVisible(true);
