@@ -23,7 +23,7 @@ public class App extends JPanel implements ActionListener {
     
     private static final Map<String, String> examples = new HashMap<String, String>();
     static {
-        examples.put("Example replace text in PowertPoint", "ExampleReplaceTextInRunsSl");    
+        examples.put("Example replace text in PowertPoint", "arichter.examples.apache.poi.sl.ReplaceTextInRunsExample");    
         examples.put("Example 2", null);    
         examples.put("Example 3", null);    
         examples.put("Example 4", null);    
@@ -55,7 +55,7 @@ public class App extends JPanel implements ActionListener {
         String className = examples.get(example);
         if (className != null) {
             try {
-                Class classObject = Class.forName(this.getClass().getPackage().getName() + "." + className);
+                Class classObject = Class.forName(className);
                 runExample(classObject);
             } catch (Exception ex) {
                 LOG.atWarn().log("Could not open class for name {}.", className);
@@ -64,9 +64,8 @@ public class App extends JPanel implements ActionListener {
     }   
 
     private void runExample(Class classObject) {
-        if (classObject.getName().endsWith("ExampleReplaceTextInRunsSl")) {
-            System.out.println(classObject.getName());
-            
+        if (classObject.getName().equals("arichter.examples.apache.poi.sl.ReplaceTextInRunsExample")) {
+   
             String sourceFilePath = null;
             File selectedFile = null;
             JFileChooser chooser = new JFileChooser();
@@ -74,7 +73,7 @@ public class App extends JPanel implements ActionListener {
                 "PowerPoint Persentaton (*.pptx)", "pptx");
             chooser.setFileFilter(filter);
             chooser.setAcceptAllFileFilterUsed(false);
-            int returnVal = chooser.showOpenDialog(null);
+            int returnVal = chooser.showOpenDialog(this);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 selectedFile = chooser.getSelectedFile();
                 sourceFilePath = selectedFile.getAbsolutePath();
@@ -91,21 +90,25 @@ public class App extends JPanel implements ActionListener {
                 "PLacehoder:", placeholderField,
                 "Replacement text:", replacementTextField
             };
-            int option = JOptionPane.showConfirmDialog(null, message, "Input parameters", JOptionPane.OK_CANCEL_OPTION);
+            int option = JOptionPane.showConfirmDialog(this, message, "Input parameters", JOptionPane.OK_CANCEL_OPTION);
             if (option == JOptionPane.OK_OPTION) {
                 placeholderText = placeholderField.getText();
                 replacementText = replacementTextField.getText();
             }
 
             String targetFilePath = null;
-            returnVal = chooser.showSaveDialog(null);
+            returnVal = chooser.showSaveDialog(this);
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 selectedFile = chooser.getSelectedFile();
                 targetFilePath = selectedFile.getAbsolutePath();
+                if (!targetFilePath.endsWith(".pptx")) {
+                    targetFilePath = targetFilePath + ".pptx";   
+                }
             }
 
             try {
-                ExampleReplaceTextInRunsSl example = (ExampleReplaceTextInRunsSl)classObject.newInstance();
+                arichter.examples.apache.poi.sl.ReplaceTextInRunsExample example = 
+                    (arichter.examples.apache.poi.sl.ReplaceTextInRunsExample)classObject.newInstance();
                 example.run(sourceFilePath, targetFilePath, placeholderText, replacementText);
             } catch (Exception ex) {
                 LOG.atWarn().log("Could not run {}.", classObject);

@@ -1,6 +1,4 @@
-package arichter.examples.apache.poi;
-
-import arichter.examples.apache.poi.sl.ReplaceTextInRuns;
+package arichter.examples.apache.poi.sl;
 
 import java.io.InputStream;
 import java.io.FileOutputStream;
@@ -20,14 +18,14 @@ import org.apache.logging.log4j.Logger;
 * 
 * @see arichter.examples.apache.poi.sl.ReplaceTextInRuns
 * */
-public class ExampleReplaceTextInRunsSl {
+public class ReplaceTextInRunsExample {
     
-    private static final Logger LOG = LogManager.getLogger(ExampleReplaceTextInRunsSl.class);
+    private static final Logger LOG = LogManager.getLogger(ReplaceTextInRunsExample.class);
     
     /**
     * Constructor method to show the usage of {@link arichter.examples.apache.poi.sl.ReplaceTextInRuns}
     */
-    public ExampleReplaceTextInRunsSl() {
+    public ReplaceTextInRunsExample() {
     }
     
     /**
@@ -58,7 +56,7 @@ public class ExampleReplaceTextInRunsSl {
                     
             XMLSlideShow slideShow = null;
             if (sourceFile == null) {
-                InputStream is = ExampleReplaceTextInRunsSl.class.getResourceAsStream("/sl/PPTHavingTextToReplace.pptx");
+                InputStream is = ReplaceTextInRunsExample.class.getResourceAsStream("/sl/PPTHavingTextToReplace.pptx");
                 slideShow = new XMLSlideShow(is);
             } else {
                 try {
@@ -119,7 +117,7 @@ public class ExampleReplaceTextInRunsSl {
             replacementText = args[3];
         }
 
-        ExampleReplaceTextInRunsSl example = new ExampleReplaceTextInRunsSl();
+        ReplaceTextInRunsExample example = new ReplaceTextInRunsExample();
         example.run(sourceFilePath, targetFilePath, placeholderText, replacementText);
 
     }
