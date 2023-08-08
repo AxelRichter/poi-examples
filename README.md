@@ -13,8 +13,8 @@ This is not a Java library to import and use via Jar library. Thats why it is no
     cd poi-examples
     mvn package -P copyDep
 
-After that the directory `poi-examples` contains the `poi-examples-1.0-SNAPSHOT.jar` in `poi-examples/target` 
-and the dependency libraries in `poi-examples/lib`. Thus:
+After that the directory `poi-examples` contains the `poi-examples-1.0-SNAPSHOT.jar` in sub directory `target` 
+and the dependency libraries are in `target/lib`. Thus:
 
     java -cp ./target/*;./target/lib/* arichter.examples.apache.poi.App
     
@@ -30,7 +30,7 @@ will create an uber jar instead of copying the dependencies.
 Download the ZIP archive via Code - Download ZIP. Unzip that somewhere.
 
 Then the `poi-examples-1.0-SNAPSHOT.jar` is in sub directory `run` 
-and the dependency libraries in `run/lib`. Thus:
+and the dependency libraries are in `run/lib`. Thus:
 
     java -cp ./run/*;./run/lib/* arichter.examples.apache.poi.App
 
