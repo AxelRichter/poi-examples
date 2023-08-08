@@ -20,6 +20,12 @@ and the dependency libraries in `poi-examples/lib`. Thus:
     
 will run the GUI App.
 
+There also is a profile using `shade` in `pom.xml`. Thus:
+
+    mvn package -P shadeDep
+        
+will create an uber jar instead of copying the dependencies.
+
 ## Whithout git and maven
 Download the ZIP archive via Code - Download ZIP. Unzip that somewhere.
 
