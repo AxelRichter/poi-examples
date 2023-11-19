@@ -74,14 +74,21 @@ public class ObjectCellValue {
             case STRING:
                 return cell.getRichStringCellValue();
             case NUMERIC:
+                double numericValue = cell.getNumericCellValue();
                 if (DateUtil.isCellDateFormatted(cell)) {
                     switch (this.dateTimeClass) {
-                        case JAVA_UTIL_DATE: return cell.getDateCellValue();
-                        case JAVA_TIME_LOCALDATETIME: return cell.getLocalDateTimeCellValue();  
+                        case JAVA_UTIL_DATE: 
+                            return cell.getDateCellValue();
+                        case JAVA_TIME_LOCALDATETIME: 
+                            if (numericValue < 1) {
+                                return cell.getLocalDateTimeCellValue().toLocalTime();                                  
+                            } else {
+                                return cell.getLocalDateTimeCellValue();  
+                            }
                     }
                     return cell.getDateCellValue();
                 } else {
-                    return cell.getNumericCellValue();
+                    return numericValue;
                 }
             case BOOLEAN:
                 return cell.getBooleanCellValue();
@@ -126,6 +133,10 @@ public class ObjectCellValue {
             cell.setCellValue((java.time.LocalDateTime)valueObject);
             //use CellUtil to set the CellStyleProperty data format to date time
             CellUtil.setCellStyleProperty(cell, CellUtil.DATA_FORMAT, 22);
+        } else if (valueObject instanceof java.time.LocalTime) {
+            cell.setCellValue(java.time.LocalDate.of(1899, 12, 31).atTime((java.time.LocalTime)valueObject));
+            //use CellUtil to set the CellStyleProperty data format to time
+            CellUtil.setCellStyleProperty(cell, CellUtil.DATA_FORMAT, 21);
         } else if (valueObject == null) {
             String blank = null;
             cell.setCellValue(blank);            
